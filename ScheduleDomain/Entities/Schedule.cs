@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ScheduleDomain.Enums;
 
 namespace ScheduleDomain.Entities;
 
-public class Schedule
+public class Schedule : Entity
 {
-
+    public Guid DoctorScheduleId { get; set; }
+    public EStatusSchedule Status { get; set; }
+    public ETypeSchedule Type { get; set; }
 }
 

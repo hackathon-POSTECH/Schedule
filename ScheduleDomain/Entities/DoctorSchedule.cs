@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ScheduleDomain.Entities;
 
-namespace ScheduleDomain.Entities;
-
-public class DockerSchedule
+public class DoctorSchedule : Entity
 {
+    public DateTime Date { get; set; }
+    public Guid DoctorId { get; set; }
+    public Guid? PacientId { get; set; }
+    public TimeSpan StartTime { get; set; }
+    public TimeSpan FinishTime { get; set; }
 }
-

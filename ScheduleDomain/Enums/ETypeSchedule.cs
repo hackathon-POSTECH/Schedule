@@ -1,6 +1,6 @@
 namespace ScheduleDomain.Enums;
 
-public enum TypeSchedule
+public enum ETypeSchedule
 {
     
 }
