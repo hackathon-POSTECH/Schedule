@@ -6,15 +6,9 @@ using ScheduleDomain.Interface;
 
 namespace ScheduleApplication.Services;
 
-public class DoctorScheduleService : IDoctorScheduleService
+public class DoctorScheduleService(IDoctorScheduleRepository doctorScheduleRepository, ILogger<DoctorScheduleService> logger) : IDoctorScheduleService
 {
-    private readonly IDoctorScheduleRepository _doctorScheduleRepository;
-    private ILogger _logger;
-    public DoctorScheduleService(IDoctorScheduleRepository doctorScheduleRepository, ILogger loger)
-    {
-        _doctorScheduleRepository = doctorScheduleRepository;
-        _logger = loger;
-    }
+
     public Result CreateSchedule(Guid doctorId, DateTime date, int startDate, int endDate)
     {
         try
@@ -40,7 +34,7 @@ public class DoctorScheduleService : IDoctorScheduleService
                 schedules.Add(model);
             }
 
-            List<DoctorSchedule> schedulesCreated = _doctorScheduleRepository.CreateDoctorSchedule(schedules);
+            List<DoctorSchedule> schedulesCreated = doctorScheduleRepository.CreateDoctorSchedule(schedules);
             
             if(schedulesCreated.Any())
                 return Result.ObjectResult(schedulesCreated, "Sucesso ao cadastrar os horários");
@@ -49,7 +43,7 @@ public class DoctorScheduleService : IDoctorScheduleService
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            logger.LogError(e.Message);
             return Result.FailResult(e.Message);
         }
     }
