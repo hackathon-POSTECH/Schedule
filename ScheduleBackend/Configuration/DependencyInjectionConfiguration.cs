@@ -1,4 +1,6 @@
-﻿using ScheduleDomain.Interface;
+﻿using ScheduleApplication.Services;
+using ScheduleApplication.Services.Interface;
+using ScheduleDomain.Interface;
 using ScheduleInfra.Repository;
 
 namespace ScheduleApi.Configuration;
@@ -9,6 +11,7 @@ public static class DependencyInjectionConfiguration
     {
         services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
         services.AddScoped<IScheduleRepository, ScheduleRepository>();
+        services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 
         services.AddScoped<IScheduleRepository, ScheduleRepository>();
