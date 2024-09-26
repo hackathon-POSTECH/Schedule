@@ -17,6 +17,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     protected BaseRepository(ScheduleContext context)
     {
         _context = context;
+        DbSet = context.Set<TEntity>();
     }
 
     public async Task<IEnumerable<TEntity>> GetAllAsync()

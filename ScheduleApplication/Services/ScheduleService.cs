@@ -17,7 +17,6 @@ public class ScheduleService(IScheduleRepository scheduleRepository) : ISchedule
     {
         var model = new Schedule()
         {
-            CreatedAt = DateTime.Now,
             DoctorScheduleId = request.DoctorScheduleId,
             Status = request.Status,
             Type = request.Type,
