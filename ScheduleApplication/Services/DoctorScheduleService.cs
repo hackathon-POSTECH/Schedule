@@ -53,5 +53,58 @@ public class DoctorScheduleService : IDoctorScheduleService
             return Result.FailResult(e.Message);
         }
     }
+
+    public Result UpdateSchedule(Guid doctorScheduleId, Guid doctorId, DateTime date, int startDate, int endDate)
+    {
+        try
+        {
+            return Result.SuccessResult("Horário atualizado com sucesso!");
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return Result.FailResult(e.Message);
+        }
+    }
+
+    public Result DeleteSchedule(Guid doctorScheduleId)
+    {
+        try
+        {
+            DoctorSchedule? model = _doctorScheduleRepository.GetById(doctorScheduleId);
+
+            if (model == null)
+                return Result.FailResult("Horário não encontrado!");
+                
+            _doctorScheduleRepository.DeleteById(model.Id);
+            
+            return Result.SuccessResult("Horário cancelado com sucesso!");
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return Result.FailResult(e.Message);
+        }
+    }
+
+    public Result CancelSchedule(Guid doctorScheduleId)
+    {
+        try
+        {
+            DoctorSchedule? model = _doctorScheduleRepository.GetById(doctorScheduleId);
+
+            if (model == null)
+                return Result.FailResult("Horário não encontrado!");
+                
+            _doctorScheduleRepository.CancelSchedule(model.Id);
+            
+            return Result.SuccessResult("Horário cancelado com sucesso!");
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return Result.FailResult(e.Message);
+        }
+    }
 }
 

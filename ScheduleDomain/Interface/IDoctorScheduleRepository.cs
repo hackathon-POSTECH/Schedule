@@ -9,6 +9,9 @@ namespace ScheduleDomain.Interface;
 
 public interface IDoctorScheduleRepository
 {
+    DoctorSchedule? GetById(Guid doctorScheduleId);
+    void DeleteById(Guid doctorScheduleId);
+    void CancelSchedule(Guid doctorScheduleId);
     List<DoctorSchedule> CreateDoctorSchedule(List<DoctorSchedule> doctorSchedules);
 }
 
