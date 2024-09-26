@@ -9,5 +9,6 @@ namespace ScheduleInfra.Repository;
 
 public class ConsultRepository : IConsultRepository
 {
+
 }
 

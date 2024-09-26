@@ -7,8 +7,10 @@ using ScheduleDomain.Entities;
 
 namespace ScheduleDomain.Interface;
 
-public interface IDoctorScheduleRepository
+public interface IDoctorScheduleRepository : IBaseRepository<DoctorSchedule>
 {
     List<DoctorSchedule> CreateDoctorSchedule(List<DoctorSchedule> doctorSchedules);
+
+    Task<DoctorSchedule?> GetByDoctorIdAsync(Guid doctorId);
 }
 

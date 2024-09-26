@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleBackend", "ScheduleBackend\ScheduleBackend.csproj", "{E0932534-0E6B-4780-8D82-3B79242EE8FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleApplication", "ScheduleApplication\ScheduleApplication.csproj", "{04077EBB-A583-4D95-93E6-D41A89EE3519}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleApplication", "ScheduleApplication\ScheduleApplication.csproj", "{04077EBB-A583-4D95-93E6-D41A89EE3519}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleApi", "ScheduleBackend\ScheduleApi.csproj", "{F3BA1CC5-02B9-41BF-8BD2-1F74804A10A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleApi", "ScheduleBackend\ScheduleApi.csproj", "{F3BA1CC5-02B9-41BF-8BD2-1F74804A10A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleDomain", "ScheduleDomain\ScheduleDomain.csproj", "{3147F00C-0806-4BDA-B890-0BE60A414E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleDomain", "ScheduleDomain\ScheduleDomain.csproj", "{3147F00C-0806-4BDA-B890-0BE60A414E5F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleInfra", "ScheduleInfra\ScheduleInfra.csproj", "{4B79665F-B5D2-491E-87C2-26FC7C40ACCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleInfra", "ScheduleInfra\ScheduleInfra.csproj", "{4B79665F-B5D2-491E-87C2-26FC7C40ACCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E0932534-0E6B-4780-8D82-3B79242EE8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0932534-0E6B-4780-8D82-3B79242EE8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0932534-0E6B-4780-8D82-3B79242EE8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0932534-0E6B-4780-8D82-3B79242EE8FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04077EBB-A583-4D95-93E6-D41A89EE3519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04077EBB-A583-4D95-93E6-D41A89EE3519}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04077EBB-A583-4D95-93E6-D41A89EE3519}.Release|Any CPU.ActiveCfg = Release|Any CPU

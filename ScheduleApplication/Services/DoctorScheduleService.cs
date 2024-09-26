@@ -47,5 +47,19 @@ public class DoctorScheduleService(IDoctorScheduleRepository doctorScheduleRepos
             return Result.FailResult(e.Message);
         }
     }
+
+    public async Task<Result> GetDoctorsAvaliableHours()
+    {
+        var result = await doctorScheduleRepository.GetAllAsync();
+
+        return Result.ObjectResult(result, "Schedule created with success.");
+    }
+
+    public async Task<Result> GetDoctorsAvaliableHoursByDoctorId(Guid doctorId)
+    {
+        var result = await doctorScheduleRepository.GetByDoctorIdAsync(doctorId);
+
+        return Result.ObjectResult(result, "Schedule created with success.");
+    }
 }
 
