@@ -31,16 +31,18 @@ public class DoctorScheduleService : IDoctorScheduleService
 
             for (DateTime time = start; time < end; time = time.AddHours(1))
             {
-                DoctorSchedule model = new();
-                model.DoctorId = doctorId;
-                model.StartTime = time.TimeOfDay;
-                model.FinishTime = time.AddHours(1).TimeOfDay;
-                model.Date = date;
+                DoctorSchedule model = new DoctorSchedule();
+
+                model
+                    .SetStartTime(time.TimeOfDay)
+                    .SetFinishTime(time.AddHours(1).TimeOfDay)
+                    .SetDate(date)
+                    .SetDoctor(doctorId);
                 
                 schedules.Add(model);
             }
 
-            List<DoctorSchedule> schedulesCreated = _doctorScheduleRepository.CreateDoctorSchedule(schedules);
+            List<DoctorSchedule> schedulesCreated = _doctorScheduleRepository.CreateDoctorSchedule(schedules, doctorId);
             
             if(schedulesCreated.Any())
                 return Result.ObjectResult(schedulesCreated, "Sucesso ao cadastrar os horários");
@@ -53,11 +55,22 @@ public class DoctorScheduleService : IDoctorScheduleService
             return Result.FailResult(e.Message);
         }
     }
-
-    public Result UpdateSchedule(Guid doctorScheduleId, Guid doctorId, DateTime date, int startDate, int endDate)
+    
+    public Result UpdateSchedule(Guid doctorScheduleId, Guid patientId, DateTime date, TimeSpan startTime, TimeSpan endTime)
     {
         try
         {
+            DoctorSchedule? model = _doctorScheduleRepository.GetById(doctorScheduleId);
+            
+            if(model == null)
+                return Result.FailResult("Horário não encontrado!");
+
+            model
+                .SetPatient(patientId)
+                .SetDate(date)
+                .SetFinishTime(endTime)
+                .SetStartTime(startTime);
+            
             return Result.SuccessResult("Horário atualizado com sucesso!");
         }
         catch (Exception e)
