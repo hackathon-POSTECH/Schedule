@@ -8,5 +8,6 @@ namespace ScheduleApplication.Services.Interface
         Result UpdateSchedule(Guid doctorScheduleId, Guid doctorId, DateTime date, TimeSpan startDate, TimeSpan endDate);
         Result DeleteSchedule(Guid doctorScheduleId);
         Result CancelSchedule(Guid doctorScheduleId);
+        Result GetDoctorsAvaliableHours(Guid doctorId);
     }
 }

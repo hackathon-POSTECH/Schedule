@@ -55,10 +55,24 @@ public class DoctorScheduleRepository(ScheduleContext context)
         return list;
     }
 
-    public async Task<DoctorSchedule?> GetByDoctorIdAsync(Guid doctorId)
+    public async Task<DoctorSchedule?> GetByDoctorScheduleIdAsync(Guid doctorScheduleId)
     {
-        var result = await _context.DoctorSchedules.FirstOrDefaultAsync(w => w.DoctorId == doctorId);
+        var result = await _context.DoctorSchedules.FirstOrDefaultAsync(w => w.Id == doctorScheduleId);
 
         return result;
+    }
+    
+    public IEnumerable<DoctorSchedule> GetListByDoctorIdAsync(Guid doctorId)
+    {
+        try
+        {
+            var result = _context.DoctorSchedules.Where(w => w.DoctorId == doctorId && w.PatientId == null);
+
+            return result;
+        }
+        catch (Exception)
+        {
+            return Enumerable.Empty<DoctorSchedule>();
+        }
     }
 }

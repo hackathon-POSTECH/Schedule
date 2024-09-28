@@ -119,5 +119,20 @@ public class DoctorScheduleService : IDoctorScheduleService
             return Result.FailResult(e.Message);
         }
     }
+
+    public Result GetDoctorsAvaliableHours(Guid doctorId)
+    {
+        try
+        {
+            List<DoctorSchedule> list = _doctorScheduleRepository.GetListByDoctorIdAsync(doctorId).ToList();
+
+            return Result.ObjectResult(list);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return Result.FailResult(e.Message);
+        }
+    }
 }
 

@@ -10,4 +10,3 @@ public class Consult : Entity
     [MaxLength(5000)]
     public string? DoctorDescription { get; set; }
 }
-

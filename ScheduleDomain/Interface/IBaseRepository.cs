@@ -18,4 +18,3 @@ public interface IBaseRepository<TEntity> where TEntity : Entity
     Task<IEnumerable<TEntity>> GetAllAsync();
     Task<TEntity> GetByIdAsync(Guid id);
 }
-

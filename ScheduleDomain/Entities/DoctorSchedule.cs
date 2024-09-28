@@ -2,10 +2,7 @@
 
 public class DoctorSchedule : Entity
 {
-    public DoctorSchedule()
-    {
-        
-    }
+    public DoctorSchedule() { }
     public DateTime Date { get; private set; }
     public Guid DoctorId { get; private set; }
     public Guid? PatientId { get; private set; }

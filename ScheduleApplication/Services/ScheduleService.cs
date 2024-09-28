@@ -15,12 +15,12 @@ public class ScheduleService(IScheduleRepository scheduleRepository) : ISchedule
 {
     public async Task<Result> CreateSchedule(CreateScheduleRequest request)
     {
-        var model = new Schedule()
-        {
-            DoctorScheduleId = request.DoctorScheduleId,
-            Status = request.Status,
-            Type = request.Type,
-        };
+        var model = new Schedule();
+
+        model
+            .SetDoctorSchedule(request.DoctorScheduleId)
+            .SetStatus(request.Status)
+            .SetType(request.Type);
 
         await scheduleRepository.AddAsync(model);
 

@@ -13,7 +13,7 @@ public interface IDoctorScheduleRepository : IBaseRepository<DoctorSchedule>
     void DeleteById(Guid doctorScheduleId);
     void CancelSchedule(Guid doctorScheduleId);
     List<DoctorSchedule> CreateDoctorSchedule(List<DoctorSchedule> doctorSchedules, Guid doctorId);
-
-    Task<DoctorSchedule?> GetByDoctorIdAsync(Guid doctorId);
+    Task<DoctorSchedule?> GetByDoctorScheduleIdAsync(Guid doctorScheduleId);
+    IEnumerable<DoctorSchedule> GetListByDoctorIdAsync(Guid doctorId);
 }
 
