@@ -60,7 +60,7 @@ public class DoctorSchedule : Entity
         return this;
     }
     
-    public DoctorSchedule ExcludePatinent()
+    public DoctorSchedule ExcludePatient()
     {
         PatientId = null;
         return this;

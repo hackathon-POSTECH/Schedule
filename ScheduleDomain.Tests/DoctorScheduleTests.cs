@@ -60,7 +60,7 @@ public class DoctorScheduleTests
         schedule.SetPatient(patientId);
 
         // Act
-        schedule.ExcludePatinent();
+        schedule.ExcludePatient();
 
         // Assert
         Assert.Null(schedule.PatientId);

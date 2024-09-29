@@ -48,7 +48,7 @@ namespace ScheduleApi.Controllers
         }
 
         [HttpPost("UpdateDoctorSchedule")]
-        public Result UpdateDoctorSchedule(Guid doctorScheduleId, Guid? patinentId, DateTime date, int start, int end)
+        public Result UpdateDoctorSchedule(Guid doctorScheduleId, Guid? patientId, DateTime date, int start, int end)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace ScheduleApi.Controllers
                 if (date.Date < DateTime.Now.Date)
                     return Result.FailResult("Não é possível editar um horário no passado");
                 
-                return doctorScheduleService.UpdateSchedule(doctorScheduleId, patinentId, date, start, end);
+                return doctorScheduleService.UpdateSchedule(doctorScheduleId, patientId, date, start, end);
             }
             catch (Exception e)
             {

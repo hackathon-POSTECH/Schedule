@@ -16,7 +16,7 @@ public class DoctorScheduleRepository(ScheduleContext context)
     {
         DoctorSchedule model = _context.DoctorSchedules.First(x => x.Id == doctorScheduleId);
 
-        model.ExcludePatinent();
+        model.ExcludePatient();
 
         _context.Update(model);
         _context.SaveChanges();
