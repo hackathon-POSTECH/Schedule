@@ -15,5 +15,6 @@ public interface IDoctorScheduleRepository : IBaseRepository<DoctorSchedule>
     List<DoctorSchedule> CreateDoctorSchedule(List<DoctorSchedule> doctorSchedules, Guid doctorId);
     Task<DoctorSchedule?> GetByDoctorScheduleIdAsync(Guid doctorScheduleId);
     IEnumerable<DoctorSchedule> GetListByDoctorIdAsync(Guid doctorId);
+    Task<IEnumerable<DoctorSchedule>> GetAllHours(Guid? doctorId = null);
 }
 

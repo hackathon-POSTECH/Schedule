@@ -75,4 +75,23 @@ public class DoctorScheduleRepository(ScheduleContext context)
             return Enumerable.Empty<DoctorSchedule>();
         }
     }
+    
+    public async Task<IEnumerable<DoctorSchedule>> GetAllHours(Guid? doctorId = null)
+    {
+        try
+        {
+            IEnumerable<DoctorSchedule> result;
+            
+            if(doctorId == null)
+                result = await _context.DoctorSchedules.Where(x => x.Date >= DateTime.Today && x.PatientId == null).ToListAsync();
+            else
+                result = await _context.DoctorSchedules.Where(x => x.Date >= DateTime.Today && x.PatientId == null && x.DoctorId == doctorId.Value).ToListAsync();
+            
+            return result;
+        }
+        catch (Exception)
+        {
+            return Enumerable.Empty<DoctorSchedule>();
+        }
+    }
 }

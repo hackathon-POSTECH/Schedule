@@ -34,24 +34,21 @@ public class DoctorScheduleServiceFixture
         Logger = new Mock<ILogger<DoctorScheduleService>>();
 
         DoctorScheduleService = new DoctorScheduleService(DoctorScheduleRepository.Object, Logger.Object);
-
     }
 
     public List<DoctorSchedule> CreateDoctorSchedules(int quantity)
     {
         return new Faker<DoctorSchedule>(CultureFaker).CustomInstantiator(f =>
         {
-            return new DoctorSchedule()
-            {
-                Id = Guid.NewGuid(),
-                PatientId = Guid.NewGuid(),
-                DoctorId = Guid.NewGuid(),
-                Date = DateTime.Now,
-                CreatedAt = DateTime.Now,
-                StartTime = f.Date.Timespan(TimeSpan.FromHours(24)),
-                FinishTime = f.Date.Timespan(TimeSpan.FromHours(24))
-            };
+            DoctorSchedule model = new DoctorSchedule();
+
+            model.SetPatient(Guid.NewGuid())
+                .SetDoctor(Guid.NewGuid())
+                .SetStartTime(TimeSpan.FromHours(1))
+                .SetFinishTime(TimeSpan.FromHours(2))
+                .SetDate(DateTime.Today);
+
+            return model;
         }).Generate(quantity);
     }
 }
-

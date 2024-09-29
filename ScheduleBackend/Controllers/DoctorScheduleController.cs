@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ScheduleApplication.Data;
 using ScheduleApplication.Services.Interface;
-using ScheduleDomain.Entities;
 
 namespace ScheduleApi.Controllers
 {
@@ -10,22 +9,16 @@ namespace ScheduleApi.Controllers
     public class DoctorScheduleController(IDoctorScheduleService doctorScheduleService) : Controller
     {
         [HttpGet("DoctorAvaliable")]
-        public Result GetDoctorsAvaliableHours()
+        public async Task<Result> GetDoctorsAvaliableHours()
         {
             try
             {
-                var value = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (value != null)
-                {
-                    Guid userId = Guid.Parse(value);
-                
-                    Result list = doctorScheduleService.GetDoctorsAvaliableHours(userId);
+                Result list = await doctorScheduleService.GetDoctorsAvaliableHours();
 
-                    if (list.Object != null)
-                        return Result.ObjectResult(list.Object, "Succeso ao buscar os horários do médico");
-                }
-
-                return Result.FailResult("Não foi possível encontrar os horários do médico");
+                if (list.Object != null)
+                    return Result.ObjectResult(list.Object, "Succeso ao buscar os horários dos médicos");
+             
+                return Result.FailResult("Não foi possível encontrar os horários dos médicos");
             }
             catch (Exception e)
             {
@@ -45,6 +38,51 @@ namespace ScheduleApi.Controllers
                     return Result.FailResult("Não é possível criar um horário no passado");
                 
                 return doctorScheduleService.CreateSchedule(doctorId, date, start, end);
+            }
+            catch (Exception e)
+            {
+                return Result.FailResult(e.Message);
+            }
+        }
+
+        [HttpPost("UpdateDoctorSchedule")]
+        public Result UpdateDoctorSchedule(Guid doctorScheduleId, Guid? patinentId, DateTime date, int start, int end)
+        {
+            try
+            {
+                if (end < start)
+                    return Result.FailResult("Não é possível editar um horário de término inferior ao de início");
+
+                if (date < DateTime.Now)
+                    return Result.FailResult("Não é possível editar um horário no passado");
+                
+                return doctorScheduleService.UpdateSchedule(doctorScheduleId, patinentId, date, start, end);
+            }
+            catch (Exception e)
+            {
+                return Result.FailResult(e.Message);
+            }
+        }
+        
+        [HttpPost("CancelSchedule")]
+        public Result CancelSchedule(Guid doctorScheduleId)
+        {
+            try
+            {
+                return doctorScheduleService.CancelSchedule(doctorScheduleId);
+            }
+            catch (Exception e)
+            {
+                return Result.FailResult(e.Message);
+            }
+        }
+        
+        [HttpPost("DeleteSchedule")]
+        public Result DeleteSchedule(Guid doctorScheduleId)
+        {
+            try
+            {
+                return doctorScheduleService.DeleteSchedule(doctorScheduleId);
             }
             catch (Exception e)
             {

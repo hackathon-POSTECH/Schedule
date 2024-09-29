@@ -27,7 +27,7 @@ public class DoctorSchedule : Entity
         return this;
     }
     
-    public DoctorSchedule SetPatient(Guid pacientId)
+    public DoctorSchedule SetPatient(Guid? pacientId)
     {
         PatientId = pacientId;
         return this;
@@ -47,7 +47,7 @@ public class DoctorSchedule : Entity
     
     public DoctorSchedule SetDate(DateTime date)
     {
-        if (date < DateTime.Now)
+        if (date.Date < DateTime.Now.Date)
             throw new ArgumentException("Horário não pode estar no passado!");
         
         Date = date;

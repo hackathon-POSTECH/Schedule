@@ -56,10 +56,13 @@ public class DoctorScheduleService : IDoctorScheduleService
         }
     }
     
-    public Result UpdateSchedule(Guid doctorScheduleId, Guid patientId, DateTime date, TimeSpan startTime, TimeSpan endTime)
+    public Result UpdateSchedule(Guid doctorScheduleId, Guid? patientId, DateTime date, int startTime, int endTime)
     {
         try
         {
+            DateTime start = new DateTime(1, 1, 1, startTime, 0, 0);
+            DateTime end = new DateTime(1, 1, 1, endTime, 0, 0);
+            
             DoctorSchedule? model = _doctorScheduleRepository.GetById(doctorScheduleId);
             
             if(model == null)
@@ -68,8 +71,8 @@ public class DoctorScheduleService : IDoctorScheduleService
             model
                 .SetPatient(patientId)
                 .SetDate(date)
-                .SetFinishTime(endTime)
-                .SetStartTime(startTime);
+                .SetFinishTime(start.TimeOfDay)
+                .SetStartTime(end.TimeOfDay);
             
             return Result.SuccessResult("Horário atualizado com sucesso!");
         }
@@ -120,11 +123,26 @@ public class DoctorScheduleService : IDoctorScheduleService
         }
     }
 
-    public Result GetDoctorsAvaliableHours(Guid doctorId)
+    public async Task<Result> GetDoctorsAvaliableHours()
     {
         try
         {
-            List<DoctorSchedule> list = _doctorScheduleRepository.GetListByDoctorIdAsync(doctorId).ToList();
+            IEnumerable<DoctorSchedule> list = await _doctorScheduleRepository.GetAllHours();
+
+            return Result.ObjectResult(list);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return Result.FailResult(e.Message);
+        }
+    }
+    
+    public async Task<Result> GetDoctorsAvaliableHoursByDoctorId(Guid doctorId)
+    {
+        try
+        {
+            IEnumerable<DoctorSchedule> list = await _doctorScheduleRepository.GetAllHours(doctorId);
 
             return Result.ObjectResult(list);
         }
