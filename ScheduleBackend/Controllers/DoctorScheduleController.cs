@@ -1,10 +1,12 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScheduleApplication.Data;
 using ScheduleApplication.Services.Interface;
 
 namespace ScheduleApi.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class DoctorScheduleController(IDoctorScheduleService doctorScheduleService) : Controller
     {
