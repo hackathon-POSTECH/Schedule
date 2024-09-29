@@ -36,7 +36,7 @@ public class DoctorScheduleService : IDoctorScheduleService
                 model
                     .SetStartTime(time.TimeOfDay)
                     .SetFinishTime(time.AddHours(1).TimeOfDay)
-                    .SetDate(date)
+                    .SetDate(date.ToUniversalTime())
                     .SetDoctor(doctorId);
                 
                 schedules.Add(model);
@@ -70,9 +70,11 @@ public class DoctorScheduleService : IDoctorScheduleService
 
             model
                 .SetPatient(patientId)
-                .SetDate(date)
+                .SetDate(date.ToUniversalTime())
                 .SetFinishTime(start.TimeOfDay)
                 .SetStartTime(end.TimeOfDay);
+
+            _doctorScheduleRepository.UpdateAsync(model);
             
             return Result.SuccessResult("Horário atualizado com sucesso!");
         }
@@ -92,7 +94,7 @@ public class DoctorScheduleService : IDoctorScheduleService
             if (model == null)
                 return Result.FailResult("Horário não encontrado!");
                 
-            _doctorScheduleRepository.DeleteById(model.Id);
+            _doctorScheduleRepository.RemoveAsync(model);
             
             return Result.SuccessResult("Horário cancelado com sucesso!");
         }

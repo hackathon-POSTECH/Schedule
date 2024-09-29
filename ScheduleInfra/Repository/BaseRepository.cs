@@ -52,7 +52,9 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
 
     public async Task RemoveAsync(TEntity entity)
     {
-        DbSet.Remove(entity);
+        entity.DeletedAt = DateTime.Now.ToUniversalTime();
+        
+        DbSet.Update(entity);
         await SaveChangesAsync();
     }
 

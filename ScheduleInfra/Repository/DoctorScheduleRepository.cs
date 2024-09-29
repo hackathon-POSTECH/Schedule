@@ -12,13 +12,6 @@ public class DoctorScheduleRepository(ScheduleContext context)
         return _context.DoctorSchedules.FirstOrDefault(x => x.Id == doctorScheduleId);
     }
 
-    public void DeleteById(Guid doctorScheduleId)
-    {
-        DoctorSchedule model = _context.DoctorSchedules.First(x => x.Id == doctorScheduleId);
-        
-        _context.DoctorSchedules.Remove(model);
-    }
-
     public void CancelSchedule(Guid doctorScheduleId)
     {
         DoctorSchedule model = _context.DoctorSchedules.First(x => x.Id == doctorScheduleId);
@@ -26,6 +19,7 @@ public class DoctorScheduleRepository(ScheduleContext context)
         model.ExcludePatinent();
 
         _context.Update(model);
+        _context.SaveChanges();
     }
 
     public List<DoctorSchedule> CreateDoctorSchedule(List<DoctorSchedule> doctorSchedules, Guid doctorId)
@@ -51,7 +45,7 @@ public class DoctorScheduleRepository(ScheduleContext context)
             _context.DoctorSchedules.Add(model);
             list.Add(model);
         }
-        
+        _context.SaveChanges();
         return list;
     }
 
@@ -76,22 +70,25 @@ public class DoctorScheduleRepository(ScheduleContext context)
         }
     }
     
-    public async Task<IEnumerable<DoctorSchedule>> GetAllHours(Guid? doctorId = null)
+    public async Task<List<DoctorSchedule>> GetAllHours(Guid? doctorId = null)
     {
         try
         {
-            IEnumerable<DoctorSchedule> result;
-            
-            if(doctorId == null)
-                result = await _context.DoctorSchedules.Where(x => x.Date >= DateTime.Today && x.PatientId == null).ToListAsync();
-            else
-                result = await _context.DoctorSchedules.Where(x => x.Date >= DateTime.Today && x.PatientId == null && x.DoctorId == doctorId.Value).ToListAsync();
-            
-            return result;
+            var query = _context.DoctorSchedules.AsQueryable();
+
+            query = query.Where(x => x.Date >= DateTime.Now.Date.ToUniversalTime() && x.PatientId == null && x.DeletedAt == null);
+
+            if (doctorId.HasValue)
+            {
+                query = query.Where(x => x.DoctorId == doctorId.Value);
+            }
+
+            return await query.ToListAsync().ConfigureAwait(false);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return Enumerable.Empty<DoctorSchedule>();
+            return Enumerable.Empty<DoctorSchedule>().ToList();
         }
     }
+
 }

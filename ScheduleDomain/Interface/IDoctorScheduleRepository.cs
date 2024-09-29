@@ -10,11 +10,10 @@ namespace ScheduleDomain.Interface;
 public interface IDoctorScheduleRepository : IBaseRepository<DoctorSchedule>
 {
     DoctorSchedule? GetById(Guid doctorScheduleId);
-    void DeleteById(Guid doctorScheduleId);
     void CancelSchedule(Guid doctorScheduleId);
     List<DoctorSchedule> CreateDoctorSchedule(List<DoctorSchedule> doctorSchedules, Guid doctorId);
     Task<DoctorSchedule?> GetByDoctorScheduleIdAsync(Guid doctorScheduleId);
     IEnumerable<DoctorSchedule> GetListByDoctorIdAsync(Guid doctorId);
-    Task<IEnumerable<DoctorSchedule>> GetAllHours(Guid? doctorId = null);
+    Task<List<DoctorSchedule>> GetAllHours(Guid? doctorId = null);
 }
 
