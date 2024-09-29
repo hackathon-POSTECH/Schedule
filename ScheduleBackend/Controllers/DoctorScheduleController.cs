@@ -34,7 +34,7 @@ namespace ScheduleApi.Controllers
                 if (end < start)
                     return Result.FailResult("Não é possível inserir um horário de término inferior ao de início");
 
-                if (date < DateTime.Now)
+                if (date.Date < DateTime.Now.Date)
                     return Result.FailResult("Não é possível criar um horário no passado");
                 
                 return doctorScheduleService.CreateSchedule(doctorId, date, start, end);
@@ -53,7 +53,7 @@ namespace ScheduleApi.Controllers
                 if (end < start)
                     return Result.FailResult("Não é possível editar um horário de término inferior ao de início");
 
-                if (date < DateTime.Now)
+                if (date.Date < DateTime.Now.Date)
                     return Result.FailResult("Não é possível editar um horário no passado");
                 
                 return doctorScheduleService.UpdateSchedule(doctorScheduleId, patinentId, date, start, end);

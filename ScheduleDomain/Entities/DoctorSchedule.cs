@@ -54,6 +54,12 @@ public class DoctorSchedule : Entity
         return this;
     }
 
+    public DoctorSchedule Delete()
+    {
+        DeletedAt = DateTime.Now.ToUniversalTime();
+        return this;
+    }
+    
     public DoctorSchedule ExcludePatinent()
     {
         PatientId = null;
