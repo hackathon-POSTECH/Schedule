@@ -1,6 +1,6 @@
 @ScheduleBackend_HostAddress = http://localhost:5241
 
-GET {{ScheduleBackend_HostAddress}}/weatherforecast/
+GET {{ScheduleBackend_HostAddress}}/
 Accept: application/json
 
 ###

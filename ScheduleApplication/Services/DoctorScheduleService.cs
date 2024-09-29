@@ -9,8 +9,8 @@ namespace ScheduleApplication.Services;
 public class DoctorScheduleService : IDoctorScheduleService
 {
     private readonly IDoctorScheduleRepository _doctorScheduleRepository;
-    private ILogger _logger;
-    public DoctorScheduleService(IDoctorScheduleRepository doctorScheduleRepository, ILogger loger)
+    private ILogger<DoctorScheduleService> _logger;
+    public DoctorScheduleService(IDoctorScheduleRepository doctorScheduleRepository, ILogger<DoctorScheduleService> loger)
     {
         _doctorScheduleRepository = doctorScheduleRepository;
         _logger = loger;

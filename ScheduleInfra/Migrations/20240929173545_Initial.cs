@@ -33,7 +33,7 @@ namespace ScheduleInfra.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DoctorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PacientId = table.Column<Guid>(type: "uuid", nullable: true),
+                    PatientId = table.Column<Guid>(type: "uuid", nullable: true),
                     StartTime = table.Column<TimeSpan>(type: "interval", nullable: false),
                     FinishTime = table.Column<TimeSpan>(type: "interval", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),

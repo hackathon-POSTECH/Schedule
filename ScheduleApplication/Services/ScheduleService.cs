@@ -24,7 +24,7 @@ public class ScheduleService(IScheduleRepository scheduleRepository) : ISchedule
 
         await scheduleRepository.AddAsync(model);
 
-        return Result.SuccessResult("Schedule created with success.");
+        return Result.SuccessResult("Agendamento criado com sucesso.");
     }
 }
 

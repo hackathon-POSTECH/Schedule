@@ -9,6 +9,7 @@ public static class DependencyInjectionConfiguration
 {
     public static void AddDependencyInjection(this IServiceCollection services)
     {
+        services.AddLogging();
         services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
         services.AddScoped<IScheduleService, ScheduleService>();
         services.AddScoped<IRabbitMqService, RabbitMqService>();

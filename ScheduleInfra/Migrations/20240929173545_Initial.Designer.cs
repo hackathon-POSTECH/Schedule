@@ -12,7 +12,7 @@ using ScheduleInfra;
 namespace ScheduleInfra.Migrations
 {
     [DbContext(typeof(ScheduleContext))]
-    [Migration("20240925003846_Initial")]
+    [Migration("20240929173545_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -70,7 +70,7 @@ namespace ScheduleInfra.Migrations
                     b.Property<TimeSpan>("FinishTime")
                         .HasColumnType("interval");
 
-                    b.Property<Guid?>("PacientId")
+                    b.Property<Guid?>("PatientId")
                         .HasColumnType("uuid");
 
                     b.Property<TimeSpan>("StartTime")

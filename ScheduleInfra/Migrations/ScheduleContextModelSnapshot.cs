@@ -67,7 +67,7 @@ namespace ScheduleInfra.Migrations
                     b.Property<TimeSpan>("FinishTime")
                         .HasColumnType("interval");
 
-                    b.Property<Guid?>("PacientId")
+                    b.Property<Guid?>("PatientId")
                         .HasColumnType("uuid");
 
                     b.Property<TimeSpan>("StartTime")
