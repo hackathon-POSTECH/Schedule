@@ -54,7 +54,7 @@ public class RabbitMqService(ILogger<RabbitMqService> logger, IConfiguration con
         try
         {
             CreateConnection();
-            var body = EncodingMessage(rabbitMqConfig.Message);
+            var body = EncodingMessage(rabbitMqConfig.Message, rabbitMqConfig.MessageType);
             _channel.BasicPublish(
                 rabbitMqConfig.ExchangeName,
                 rabbitMqConfig.RoutingKey,
@@ -70,9 +70,15 @@ public class RabbitMqService(ILogger<RabbitMqService> logger, IConfiguration con
         }
     }
 
-    private byte[] EncodingMessage<T>(T message)
+    private byte[] EncodingMessage<T>(T message, List<string> messageType)
     {
-        var jsonSerialize = JsonSerializer.Serialize(message);
+        var messageObj = new
+        {
+            Message = message,
+            MessageType = messageType
+        };
+
+        var jsonSerialize = JsonSerializer.Serialize(messageObj);
         return Encoding.UTF8.GetBytes(jsonSerialize);
     }
 }

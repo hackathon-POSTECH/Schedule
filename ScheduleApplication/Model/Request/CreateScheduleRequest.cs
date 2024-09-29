@@ -10,6 +10,7 @@ namespace ScheduleApplication.Model.Request;
 public class CreateScheduleRequest
 {
     public Guid DoctorScheduleId { get; set; }
+    public Guid PatientId { get; set; }
     public EStatusSchedule Status { get; set; }
     public ETypeSchedule Type { get; set; }
 }
