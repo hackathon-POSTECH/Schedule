@@ -54,5 +54,20 @@ public class ScheduleServiceFixture
             return model;
         }).Generate(quantity);
     }
+
+    public List<DoctorSchedule> CreateDoctorSchedulesWithPacientIdNull(int quantity)
+    {
+        return new Faker<DoctorSchedule>(CultureFaker).CustomInstantiator(f =>
+        {
+            DoctorSchedule model = new DoctorSchedule();
+
+            model.SetPatient(Guid.NewGuid())
+                .SetStartTime(TimeSpan.FromHours(1))
+                .SetFinishTime(TimeSpan.FromHours(2))
+                .SetDate(DateTime.Today);
+
+            return model;
+        }).Generate(quantity);
+    }
 }
 

@@ -20,15 +20,14 @@ public class ScheduleServiceTests(ScheduleServiceFixture fixture)
         // Arrange
         fixture.Execute();
 
-        DoctorSchedule doctorSchedule = fixture.CreateDoctorSchedules(1).First();
+        DoctorSchedule doctorSchedule = fixture.CreateDoctorSchedulesWithPacientIdNull(1).First();
 
         fixture.DoctorScheduleRepository.Setup(s => s.GetByDoctorScheduleIdAsync(doctorSchedule.Id));
-
 
         var request = new CreateScheduleRequest()
         {
             DoctorScheduleId = doctorSchedule.Id,
-            PatientId = doctorSchedule.PatientId ?? new()
+            PatientId = Guid.NewGuid(),
         };
 
         // Act

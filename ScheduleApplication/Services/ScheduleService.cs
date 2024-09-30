@@ -18,7 +18,9 @@ public class ScheduleService(IScheduleRepository scheduleRepository, IDoctorSche
     {
         var doctorSchedule = await doctorScheduleRepository.GetByDoctorScheduleIdAsync(request.DoctorScheduleId);
 
-        if (doctorSchedule == null) return Result.FailResult("Agendamento não encontrado!");
+        if (doctorSchedule == null) return Result.FailResult("Horário indiponível!");
+
+        if (doctorSchedule.PatientId != null) return Result.FailResult("Esse horário já esta reservado!");
 
         doctorSchedule.SetPatient(request.PatientId);
 
