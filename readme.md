@@ -45,7 +45,7 @@ The service publishes messages to RabbitMQ for notifying doctors when a new appo
 ## Setup & Installation
 
 ### Prerequisites
-- .NET 6 SDK
+- .NET 8 SDK
 - Docker & Docker Compose
 - RabbitMQ
 - PostgreSQL
